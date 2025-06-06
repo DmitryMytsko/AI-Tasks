@@ -2,61 +2,79 @@
 
 /* Общие стили для навигации */
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem; /* Добавим немного отступов для красоты */
-    position: relative; /* Необходимо для позиционирования мобильного меню */
-  }
+  display: flex;
+  justify-content: space-between; /* На десктопе элементы по краям */
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  /* Анимация для контейнера */
+  transition: all 0.4s ease-in-out;
+}
+
+/* Стили для меню на больших экранах (Desktop) */
+.menu {
+  display: flex;
+  flex-direction: row; /* Явно указываем горизонтальное направление */
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent; /* Прозрачный фон на десктопе */
+  width: auto; /* Автоматическая ширина на десктопе */
   
-  /* Стили для меню на больших экранах (Desktop First) */
+  /* Анимация для свойств, которые изменятся на мобильном виде */
+  transition: all 0.4s ease-in-out;
+}
+
+.menu li {
+  padding: 0.5rem 0; /* Добавим немного отступов для плавной анимации */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.menu li:hover {
+  color: #007bff;
+}
+
+/* Кнопка-гамбургер теперь не нужна и всегда скрыта */
+.hamburger {
+  display: none;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 767px) {
+  /* Контейнер навигации становится вертикальным */
+  .nav {
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое */
+    gap: 1rem; /* Отступ между логотипом (если есть) и меню */
+  }
+
+  /* Меню становится вертикальным, на всю ширину и остается видимым */
   .menu {
-    display: flex;
-    gap: 2rem;
-    list-style: none; /* Убираем маркеры списка */
-    margin: 0;
-    padding: 0;
+    flex-direction: column;
+    width: 100%;
+    gap: 0; /* Убираем отступы через gap, будем стилизовать li */
+    background-color: #ffffff; /* Делаем фон, чтобы меню выделялось */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
-  
-  .hamburger {
-    display: none; /* По умолчанию кнопка-гамбургер скрыта */
-    cursor: pointer;
-    /* Добавим простые стили для кнопки */
-    padding: 0.5rem;
-    border: 1px solid #333;
-    background: none;
-    border-radius: 4px;
+
+  /* Стилизуем пункты меню для вертикального вида */
+  .menu li {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0; /* Увеличиваем вертикальные отступы */
+    border-bottom: 1px solid #f0f0f0; /* Добавляем разделители */
   }
-  
-  /* Стили для мобильных устройств */
-  /* ! ГЛАВНОЕ ИСПРАВЛЕНИЕ: изменено с 768px на 767px */
-  @media (max-width: 767px) {
-    .menu {
-      /* На мобильных устройствах меню скрыто и позиционируется абсолютно */
-      flex-direction: column;
-      position: absolute;
-      top: 100%; /* Позиционируем сразу под навигационной панелью */
-      left: 0;
-      width: 100%;
-      background: #fff;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      
-      /* Скрываем меню за пределами экрана */
-      transform: translateY(-150%);
-      transition: transform 0.3s ease-in-out;
-  
-      /* Дополнительные стили для лучшего вида на мобильных */
-      padding: 1rem;
-      gap: 1rem;
-      align-items: center;
-    }
-  
-    /* Класс .open делает меню видимым */
-    .menu.open {
-      transform: translateY(0);
-    }
-  
-    .hamburger {
-      display: block; /* Показываем кнопку-гамбургер только на мобильных */
-    }
+
+  .menu li:last-child {
+    border-bottom: none; /* Убираем разделитель у последнего элемента */
   }
+
+  .menu li:hover {
+    background-color: #f7f7f7; /* Выделяем пункт при наведении */
+    color: #0056b3;
+  }
+}
